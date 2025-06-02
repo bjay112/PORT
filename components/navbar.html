@@ -1,0 +1,219 @@
+<!-- Navbar Component -->
+<nav class="main-nav">
+    <div class="nav-container">
+        <a href="home.html" class="nav-logo">
+            <img src="../393159227_122097501260084093_3733233646376658883_n-removebg-preview.png" alt="Pinitikan Logo" class="nav-logo-img">
+            <span>PINITIKAN</span>
+        </a>
+        
+        <!-- Desktop Menu -->
+        <div class="nav-desktop-menu">
+            <a href="home.html" class="nav-link">Home</a>
+            <a href="gallery.html" class="nav-link">Gallery</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+        </div>
+        
+        <!-- Mobile Menu Button -->
+        <button class="nav-mobile-menu-btn" id="mobileMenuBtn">
+            <svg class="nav-icon" viewBox="0 0 24 24" id="menuIcon">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+            <svg class="nav-icon" viewBox="0 0 24 24" id="closeIcon" style="display: none;">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div class="nav-mobile-menu" id="mobileMenu">
+        <div class="nav-container">
+            <a href="home.html" class="nav-link">Home</a>
+            <a href="gallery.html" class="nav-link">Gallery</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+        </div>
+    </div>
+</nav>
+
+<style>
+    .main-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
+        transition: all 0.3s;
+        padding: 1.5rem 0;
+        background-color: transparent;
+    }
+
+    .main-nav.scrolled {
+        background-color: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(8px);
+        padding: 0.75rem 0;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    @media (min-width: 768px) {
+        .nav-container {
+            padding: 0 3rem;
+        }
+    }
+
+    .nav-logo {
+        color: white;
+        font-family: serif;
+        font-size: 1.5rem;
+        letter-spacing: 0.05em;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .nav-logo-img {
+        height: 40px;
+        width: auto;
+    }
+
+    .nav-desktop-menu {
+        display: none;
+    }
+
+    @media (min-width: 768px) {
+        .nav-desktop-menu {
+            display: flex;
+            gap: 2rem;
+        }
+    }
+
+    .nav-mobile-menu-btn {
+        display: block;
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        padding: 0.5rem;
+    }
+
+    @media (min-width: 768px) {
+        .nav-mobile-menu-btn {
+            display: none;
+        }
+    }
+
+    .nav-mobile-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(8px);
+    }
+
+    .nav-mobile-menu.active {
+        display: block;
+    }
+
+    .nav-mobile-menu .nav-container {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.5rem;
+    }
+
+    .nav-link {
+        color: white;
+        text-decoration: none;
+        font-size: 0.875rem;
+        letter-spacing: 0.05em;
+        transition: color 0.2s;
+    }
+
+    .nav-link:hover {
+        color: #e5e5e5;
+    }
+
+    .nav-link.active {
+        color: white;
+        font-weight: 500;
+    }
+
+    .nav-mobile-menu .nav-link {
+        display: block;
+        padding: 0.5rem 0;
+    }
+
+    /* SVG Icons */
+    .nav-icon {
+        width: 24px;
+        height: 24px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+</style>
+
+<script>
+    // Mobile menu functionality
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuIcon = document.getElementById('menuIcon');
+    const closeIcon = document.getElementById('closeIcon');
+
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('active');
+        menuIcon.style.display = menuIcon.style.display === 'none' ? 'block' : 'none';
+        closeIcon.style.display = closeIcon.style.display === 'none' ? 'block' : 'none';
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+            mobileMenu.classList.remove('active');
+            menuIcon.style.display = 'block';
+            closeIcon.style.display = 'none';
+        }
+    });
+
+    // Scroll effect
+    const nav = document.querySelector('.main-nav');
+    const heroSection = document.querySelector('.hero');
+    
+    window.addEventListener('scroll', () => {
+        if (heroSection) {
+            const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+            if (window.scrollY > heroBottom - 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        }
+    });
+
+    // Active link highlighting
+    const navLinks = document.querySelectorAll('.nav-link');
+    const currentPath = window.location.pathname.split('/').pop() || 'home.html';
+
+    navLinks.forEach(link => {
+        const linkPath = link.getAttribute('href');
+        if (linkPath === currentPath) {
+            link.classList.add('active');
+        }
+    });
+</script> 

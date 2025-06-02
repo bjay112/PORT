@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Pinitikan</title>
+    <script src="components.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            color: white;
+            background-color: #000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 0 3rem;
+            }
+        }
+
+        .about-section {
+            padding-top: 6rem;
+            padding-bottom: 5rem;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-16 {
+            margin-bottom: 4rem;
+        }
+
+        .mb-4 {
+            margin-bottom: 1rem;
+        }
+
+        .mb-6 {
+            margin-bottom: 1.5rem;
+        }
+
+        .mb-8 {
+            margin-bottom: 2rem;
+        }
+
+        .mt-20 {
+            margin-top: 5rem;
+        }
+
+        .font-serif {
+            font-family: serif;
+        }
+
+        .text-4xl {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+        }
+
+        .text-3xl {
+            font-size: clamp(1.75rem, 3vw, 1.875rem);
+        }
+
+        .text-xl {
+            font-size: 1.25rem;
+        }
+
+        .text-gray-300 {
+            color: #d4d4d8;
+        }
+
+        .text-gray-400 {
+            color: #9ca3af;
+        }
+
+        .leading-relaxed {
+            line-height: 1.625;
+        }
+
+        .grid {
+            display: grid;
+            gap: 4rem;
+        }
+
+        @media (min-width: 1024px) {
+            .grid-cols-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .rounded-md {
+            border-radius: 0.375rem;
+        }
+
+        .w-full {
+            width: 100%;
+        }
+
+        .border-t {
+            border-top-width: 1px;
+        }
+
+        .border-zinc-800 {
+            border-color: #27272a;
+        }
+
+        .pt-6 {
+            padding-top: 1.5rem;
+        }
+
+        .space-y-2 > * + * {
+            margin-top: 0.5rem;
+        }
+
+        .specialties-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .specialties-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .specialty-icon {
+            width: 5rem;
+            height: 5rem;
+            border-radius: 9999px;
+            background-color: #18181b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.875rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .animate-left {
+            animation: fadeInLeft 0.6s forwards;
+        }
+
+        .animate-right {
+            animation: fadeInRight 0.6s 0.2s forwards;
+        }
+
+        .divider {
+            width: 5rem;
+            height: 1px;
+            background: #3f3f46;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="navbar-container"></div>
+
+    <main>
+        <section class="about-section">
+            <div class="container">
+                <div class="text-center mb-16">
+                    <h1 class="text-4xl font-serif mb-4">About Me</h1>
+                    <div class="divider"></div>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2">
+                    <div class="animate-left">
+                        <div class="image-stack">
+                            <img 
+                                src="../images/8d088cde-f0a6-4d53-bf78-fe40e7333cf3.jpg" 
+                                alt="About Photo" 
+                                class="w-full rounded-md mb-4"
+                            />
+                            <img 
+                                src="../images/SnapInsta.to_463139501_1061198348992159_1384644721084808777_n.jpg" 
+                                alt="Second About Photo" 
+                                class="w-full rounded-md"
+                            />
+                        </div>
+                    </div>
+                    
+                    <div class="animate-right">
+                        <h2 class="text-3xl font-serif mb-6">Brian Jay Eleazar</h2>
+                        <p class="text-gray-300 mb-8 leading-relaxed">
+                            I am an IT student at STI College with 2 years of experience in portrait photography. My passion lies in capturing the unique stories and personalities of individuals through my lens.
+                        </p>
+                        
+                        <p class="text-gray-300 mb-6 leading-relaxed">
+                            My approach to portrait photography is deeply personal. I believe that every face tells a 
+                            unique story, and my mission is to create an environment where your authentic self can shine 
+                            through. Whether in my studio or on location, I work to establish a connection that allows 
+                            for genuine expression.
+                        </p>
+                        
+                        <p class="text-gray-300 mb-8 leading-relaxed">
+                            When I'm not behind the camera, I'm constantly studying the art of portraiture, from classical 
+                            paintings to contemporary works, seeking inspiration to bring fresh perspectives to my work.
+                        </p>
+                        
+                        <div class="border-t border-zinc-800 pt-6 mb-8">
+                            <h3 class="text-xl font-serif mb-4">Portrait Philosophy</h3>
+                            <ul class="text-gray-400 space-y-2">
+                                <li>• Every face tells a unique story</li>
+                                <li>• Authentic emotion creates powerful portraits</li>
+                                <li>• Light shapes character and mood</li>
+                                <li>• Connection between photographer and subject is essential</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="border-t border-zinc-800 pt-6">
+                            <h3 class="text-xl font-serif mb-4">Portrait Equipment</h3>
+                            <ul class="text-gray-400 space-y-2">
+                                <li>• Sony ZV-E10 for versatile shooting</li>
+                                <li>• 80mm lens for detailed portraits</li>
+                                <li>• 50mm lens for classic portraits and wider shots</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-20">
+                    <h2 class="text-3xl font-serif mb-8 text-center">Portrait Specialties</h2>
+                    <div class="specialties-grid">
+                        <div class="text-center">
+                            <div class="specialty-icon">
+                                <span>👤</span>
+                            </div>
+                            <h3 class="text-xl font-serif mb-3">Individual Portraits</h3>
+                            <p class="text-gray-400">
+                                Capturing personal essence through carefully composed individual portraits that highlight unique character.
+                            </p>
+                        </div>
+                        
+                        <div class="text-center">
+                            <div class="specialty-icon">
+                                <span>👨‍👩‍👧</span>
+                            </div>
+                            <h3 class="text-xl font-serif mb-3">Family Portraits</h3>
+                            <p class="text-gray-400">
+                                Creating meaningful family portraits that showcase connections and relationships in an authentic way.
+                            </p>
+                        </div>
+                        
+                        <div class="text-center">
+                            <div class="specialty-icon">
+                                <span>👔</span>
+                            </div>
+                            <h3 class="text-xl font-serif mb-3">Professional Portraits</h3>
+                            <p class="text-gray-400">
+                                Developing sophisticated headshots and branding portraits for professionals and creative individuals.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-container"></div>
+</body>
+</html> 

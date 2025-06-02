@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinitikan - Home</title>
+    <script src="components.js"></script>
+    <script src="data.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            color: white;
+            background-color: #000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 0 3rem;
+            }
+        }
+
+        /* Utility Classes */
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-16 {
+            margin-top: 4rem;
+        }
+
+        .mb-16 {
+            margin-bottom: 4rem;
+        }
+
+        .max-w-2xl {
+            max-width: 42rem;
+        }
+
+        .mx-auto {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .text-gray-400 {
+            color: #9ca3af;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .hero-image {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1s;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-image.active {
+            opacity: 1;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.6));
+            z-index: 10;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 20;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 40px; /* Add margin to account for navbar */
+        }
+
+        .hero h1 {
+            font-family: serif;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s forwards;
+        }
+
+        .hero p {
+            font-size: clamp(1.125rem, 2vw, 1.5rem);
+            color: #e5e5e5;
+            margin-bottom: 2.5rem;
+            max-width: 32rem;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            animation: fadeIn 0.8s 0.3s forwards;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: white;
+            color: black;
+        }
+
+        .btn-primary:hover {
+            background: #e5e5e5;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 1px solid white;
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: black;
+            transform: translateY(-2px);
+        }
+
+        .icon {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Featured Work Section */
+        .featured {
+            padding: 8rem 0;
+            background: #18181b;
+            margin-top: -1px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-family: serif;
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            margin-bottom: 1rem;
+        }
+
+        .divider {
+            width: 5rem;
+            height: 1px;
+            background: #3f3f46;
+            margin: 0 auto;
+        }
+
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .grid-cols-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .grid-cols-3 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .photo-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            aspect-ratio: 1;
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .photo-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .photo-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            transition: opacity 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .photo-card:hover .photo-overlay {
+            opacity: 1;
+        }
+
+        .photo-info {
+            text-align: center;
+            padding: 0 1.5rem;
+        }
+
+        .photo-info h3 {
+            font-family: serif;
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .photo-info p {
+            font-size: 0.875rem;
+            color: #d4d4d8;
+        }
+
+        /* About Section */
+        .about {
+            padding: 8rem 0;
+            background: black;
+            margin-top: -1px;
+        }
+
+        .about-grid {
+            display: grid;
+            gap: 3rem;
+        }
+
+        @media (min-width: 768px) {
+            .about-grid {
+                grid-template-columns: 1fr 1fr;
+                align-items: center;
+                gap: 4rem;
+            }
+        }
+
+        .about-content h2 {
+            font-family: serif;
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
+            color: #d4d4d8;
+            margin-bottom: 1.5rem;
+            line-height: 1.625;
+            font-size: 1.125rem;
+        }
+
+        .about-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .about-images {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(2, 1fr);
+            }
+        }
+
+        .about-images img {
+            width: 100%;
+            border-radius: 0.5rem;
+            aspect-ratio: 1;
+            object-fit: cover;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 8rem 0;
+            background: #09090b;
+            margin-top: -1px;
+        }
+
+        .services-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .service-card {
+            background: #18181b;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-card h3 {
+            font-family: serif;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: #a1a1aa;
+            margin-bottom: 1.5rem;
+            line-height: 1.625;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Logo Styles */
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 30;
+            width: 150px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="navbar-container"></div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div id="heroImages"></div>
+            <div class="hero-overlay"></div>
+            <div class="container hero-content">
+                <h1>Pinitikan</h1>
+                <p>Capturing the essence and soul of each individual</p>
+            </div>
+        </section>
+
+        <!-- Featured Work Section -->
+        <section class="featured">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Featured Portraits</h2>
+                    <div class="divider"></div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3" id="featuredGrid"></div>
+                
+                <div class="text-center mt-16">
+                    <a href="gallery.html" class="btn btn-outline">
+                        View All Portraits
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M5 12h14M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-content">
+                        <h2>The Power of Portrait Photography</h2>
+                        <p>Portrait photography is more than just capturing a person's likeness—it's about revealing character, emotion, and telling stories through visual composition.</p>
+                        <p>Whether through studio portraits with controlled lighting or natural environment sessions that incorporate meaningful contexts, my goal is to create timeless images that reflect your unique personality.</p>
+                        <a href="about.html" class="btn btn-outline">
+                            Learn more about my approach
+                            <svg class="icon" viewBox="0 0 24 24">
+                                <path d="M5 12h14M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="about-images" id="aboutImages"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="services">
+            <div class="container">
+                <div class="text-center mb-16">
+                    <h2 class="section-title">Portrait Services</h2>
+                    <p class="text-gray-400 max-w-2xl mx-auto">
+                        Tailored portrait sessions designed to capture your authentic self
+                    </p>
+                </div>
+                
+                <div class="services-grid">
+                    <div class="service-card">
+                        <h3>Studio Portraits</h3>
+                        <p>Professional studio sessions with controlled lighting for classic, timeless portraits that highlight your best features.</p>
+                        <a href="contact.html?subject=Studio Portraits" class="btn btn-outline">
+                            Book a session
+                            <svg class="icon" viewBox="0 0 24 24">
+                                <path d="M5 12h14M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    </div>
+                    
+                    <div class="service-card">
+                        <h3>Environmental Portraits</h3>
+                        <p>On-location sessions in meaningful environments that add context and depth to your personal story.</p>
+                        <a href="contact.html?subject=Environmental Portraits" class="btn btn-outline">
+                            Book a session
+                            <svg class="icon" viewBox="0 0 24 24">
+                                <path d="M5 12h14M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    </div>
+                    
+                    <div class="service-card">
+                        <h3>Creative Concept Portraits</h3>
+                        <p>Artistic, conceptual portraits that push creative boundaries and create unique visual statements.</p>
+                        <a href="contact.html?subject=Creative Concept Portraits" class="btn btn-outline">
+                            Book a session
+                            <svg class="icon" viewBox="0 0 24 24">
+                                <path d="M5 12h14M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-container"></div>
+
+    <script>
+        // Load navbar component
+        fetch('components/navbar.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('navbar-container').innerHTML = html;
+                
+                // Initialize navbar scroll effect after it's loaded
+                const nav = document.querySelector('.main-nav');
+                const heroSection = document.querySelector('.hero');
+                
+                window.addEventListener('scroll', () => {
+                    if (heroSection) {
+                        const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+                        if (window.scrollY > heroBottom - 100) {
+                            nav.classList.add('scrolled');
+                        } else {
+                            nav.classList.remove('scrolled');
+                        }
+                    }
+                });
+            });
+
+        // Hero Image Rotation
+        let currentImageIndex = 0;
+        const featuredPhotos = [
+            {
+                id: 1,
+                title: "Portrait 1",
+                category: "Portrait",
+                imageUrl: "/images/1bdadb7b-49da-4a7b-bbb1-12ddb21de048.jpg",
+                featured: true
+            },
+            {
+                id: 2,
+                title: "Portrait 2",
+                category: "Portrait",
+                imageUrl: "/images/1eec5d81-5c5b-4d35-8c29-7b1be37d8992.jpg",
+                featured: true
+            },
+            {
+                id: 3,
+                title: "Portrait 3",
+                category: "Portrait",
+                imageUrl: "/images/6d3843f7-55a2-4518-b4fa-fbd382aecd5d.jpg",
+                featured: true
+            },
+            {
+                id: 4,
+                title: "Portrait 4",
+                category: "Portrait",
+                imageUrl: "/images/9fdf2ba4-da15-44d5-88b2-00f621cbd57c.jpg",
+                featured: true
+            },
+            {
+                id: 5,
+                title: "Portrait 5",
+                category: "Portrait",
+                imageUrl: "/images/73b5ec68-4f57-48de-89af-ec23a2a59c12.jpg",
+                featured: true
+            },
+            {
+                id: 6,
+                title: "Portrait 6",
+                category: "Portrait",
+                imageUrl: "/images/3118be66-8028-443f-b1e5-e37001c7a392.jpg",
+                featured: true
+            }
+        ];
+        const heroImagesContainer = document.getElementById('heroImages');
+
+        // Create hero images
+        featuredPhotos.forEach((photo, index) => {
+            const div = document.createElement('div');
+            div.className = `hero-image ${index === 0 ? 'active' : ''}`;
+            div.innerHTML = `
+                <img src="${photo.imageUrl}" alt="${photo.title}">
+            `;
+            heroImagesContainer.appendChild(div);
+        });
+
+        // Rotate hero images
+        setInterval(() => {
+            const images = document.querySelectorAll('.hero-image');
+            images[currentImageIndex].classList.remove('active');
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            images[currentImageIndex].classList.add('active');
+        }, 5000);
+
+        // Featured Grid
+        const featuredGrid = document.getElementById('featuredGrid');
+        featuredPhotos.forEach(photo => {
+            const link = document.createElement('a');
+            link.href = `/gallery/${photo.id}`;
+            link.className = 'photo-card';
+            link.innerHTML = `
+                <img src="${photo.imageUrl}" alt="${photo.title}">
+                <div class="photo-overlay">
+                    <div class="photo-info">
+                        <h3>${photo.title}</h3>
+                        <p>${photo.category}</p>
+                    </div>
+                </div>
+            `;
+            featuredGrid.appendChild(link);
+        });
+
+        // About Images
+        const aboutImages = document.getElementById('aboutImages');
+        const aboutPhotos = [
+            {
+                title: "About Photo 1",
+                imageUrl: "/images/20104e69-292c-48a1-bc34-fa453b9f5d90.jpg"
+            },
+            {
+                title: "About Photo 2",
+                imageUrl: "/images/248403f3-afb5-4e28-bd07-9f2cad4ddfbe.jpg"
+            },
+            {
+                title: "About Photo 3",
+                imageUrl: "/images/1bdadb7b-49da-4a7b-bbb1-12ddb21de048.jpg"
+            },
+            {
+                title: "About Photo 4",
+                imageUrl: "/images/1eec5d81-5c5b-4d35-8c29-7b1be37d8992.jpg"
+            }
+        ];
+        
+        aboutPhotos.forEach(photo => {
+            const img = document.createElement('img');
+            img.src = photo.imageUrl;
+            img.alt = photo.title;
+            aboutImages.appendChild(img);
+        });
+    </script>
+</body>
+</html> 
