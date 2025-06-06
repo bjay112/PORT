@@ -12,10 +12,10 @@ async function loadComponent(elementId, componentPath) {
 // Function to initialize components
 function initializeComponents() {
     // Load navbar
-    loadComponent('navbar-container', './navbar.html');
+    loadComponent('navbar-container', 'navbar.html');
     
     // Load footer
-    loadComponent('footer-container', './footer.html');
+    loadComponent('footer-container', 'footer.html');
 }
 
 // Initialize components when the DOM is loaded
